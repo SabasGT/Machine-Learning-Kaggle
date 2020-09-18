@@ -33,7 +33,7 @@ melbourne_data = melbourne_data.dropna(axis=0)
 y = melbourne_data.Price
 
 # Ahora escogemos que Features usar para predecir nuestra y.
-melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude', 'YearBuilt2']
+melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude', 'YearBuilt']
 
 # Convencionalmente a este se le conoce como el vector "x"
 X = melbourne_data[melbourne_features]
