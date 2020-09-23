@@ -55,6 +55,7 @@ melb_preds = melbourne_model.predict(val_X)
 
 ### MOSTRAR EL ERROR ###
 
-print("El Error Medio Absoluto es de: " + str(mean_absolute_error(val_y, melb_preds)))
+print("El Error Medio Absoluto es de: " + str(mean_absolute_error(melb_preds, val_y)))
+
 
 
