@@ -92,4 +92,34 @@ melbourne_better_model.fit(train_X, train_y) # Fit the model
 val_predicciones = melbourne_better_model.predict(val_X)
 print("El Error Medio Absoluto es de: " + str(mean_absolute_error(val_y, val_predicciones)))
 
+### COMPARAR LA EFICIENCIA DEL MODELO A DISTINTOS NIVELES DE PROFUNDIDAD ###
+
+# De esta manera podemos ver cuántos nodos (usando este modelo de regresión por árbol) nos dan los mejores resultados
+
+def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
+    """ Funcion para obtener el error promedio con distintos niveles de nodos """
+    model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
+    model.fit(train_X, train_y)
+    preds_val = model.predict(val_X)
+    mae = mean_absolute_error(val_y, preds_val)
+    return(mae)
+
+# Comparar el Error Promedio con 6 distintos niveles de nodos y devolver el mas apropiado
+leaf_nodes_candidates = [5, 50, 500, 1000, 2500, 5000]
+maes_obtenidos = []
+
+for max_leaf_nodes in leaf_nodes_candidates:
+    my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
+    maes_obtenidos.append(my_mae)
+    print("Máximos nodos de hojas: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+
+print("Un menor MAE es mejor.")
+
+# Guardar la posición del mejor índice
+mejor_indice = maes_obtenidos.index(min(maes_obtenidos))
+
+print("")
+print("Los mejores resultados se obtuvieron con " + str(leaf_nodes_candidates[mejor_indice]) + " nodos.")
+
+
 
